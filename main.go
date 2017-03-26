@@ -17,6 +17,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -47,12 +48,29 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
+
+			message := event.Message
+
+
+			match, _ := regexp.MatchString("罐罐", message)
+			if( match ){
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("肚子裡永遠少一罐")).Do(); err != nil {
+					log.Print(err)
+				}
+
+			}else{
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+					log.Print(err)
+				}
+			}
+			/**
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
-					log.Print(err+"23")
+					log.Print(err)
 				}
 			}
+			**/
 		}
 	}
 }
