@@ -1,6 +1,6 @@
 {
-  "name": "LineBotTemplate",
-  "description": "Line Bot API template",
+  "name": "NaNaLineBot",
+  "description": "Line Bot For NaNa",
   "repository": "https://github.com/hackmigo/line-bot",
   "keywords": ["Line", "go", "static"],
   "buildpacks": [
