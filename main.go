@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 
-			var message = event.Message
+			message := event.Message.Text
 
 			match, _ := regexp.MatchString("罐罐", message)
 			if( match ){
