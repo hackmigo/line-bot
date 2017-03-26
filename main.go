@@ -49,27 +49,24 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 
-			var msg = event.Message.Text;
-
-			match, _ := regexp.MatchString("罐罐", msg)
-			if( match ){
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("肚子裡永遠少一罐")).Do(); err != nil {
-					log.Print(err)
-				}
-
-			} else {
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
-					log.Print(err)
-				}
-			}
-			/**
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
-					log.Print(err)
+
+				var msg = message.Text;
+
+				match, _ := regexp.MatchString("罐罐", msg)
+				if( match ){
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("肚子裡永遠少一罐")).Do(); err != nil {
+						log.Print(err)
+					}
+
+				} else {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
+						log.Print(err)
+					}
 				}
+
 			}
-			**/
 		}
 	}
 }
