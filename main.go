@@ -57,7 +57,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 				for index,element := range keyword {
 
-					match, _ := regexp.MatchString(index, msg)
+					var match = regexp.MatchString(index, msg)
 					if( match ){
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(element)).Do(); err != nil {
 							log.Print(err)
