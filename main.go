@@ -52,7 +52,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 
-				msg = message.Text
+				msg := message.Text
 				var keyword [3]string
 				keyword["罐罐"] = "肚子裡永遠少一罐"
 				keyword["娜娜"] = "叫我嗎？叫一次一百萬"
