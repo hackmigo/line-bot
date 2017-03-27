@@ -53,13 +53,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 
 				msg := message.Text
-				var keyword map[string]string
-				keyword["罐罐"] = "肚子裡永遠少一罐"
-				keyword["娜娜"] = "叫我嗎？叫一次一百萬"
-				keyword["天氣"] = "不管天氣好壞,我都不想離開被窩"
+				keyword := map[string]string{ "罐罐":"肚子裡永遠少一罐", "娜娜":"叫我嗎？叫一次一百萬" ,"天氣":"不管天氣好壞,我都不想離開被窩" };
 
 				for index,element := range keyword {
-					bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("1")).Do();
 
 					match, _ := regexp.MatchString(index, msg)
 					if( match ){
