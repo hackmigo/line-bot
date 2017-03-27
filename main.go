@@ -52,19 +52,26 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 
-				var msg = message.Text;
+				msg = message.Text
+				var keyword [3]string
+				keyword["罐罐"] = "肚子裡永遠少一罐"
+				keyword["娜娜"] = "叫我嗎？叫一次一百萬"
+				keyword["天氣"] = "不管天氣好壞,我都不想離開被窩"
 
-				match, _ := regexp.MatchString("罐罐", msg)
-				if( match ){
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("肚子裡永遠少一罐")).Do(); err != nil {
-						log.Print(err)
-					}
+				for index,element := range keyword {
+					match, _ := regexp.MatchString(index, msg)
+					if( match ){
+						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(element)).Do(); err != nil {
+							log.Print(err)
+						}
 
-				} else {
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
-						log.Print(err)
+					} else {
+						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
+							log.Print(err)
+						}
 					}
 				}
+
 
 			}
 		}
