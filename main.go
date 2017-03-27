@@ -58,6 +58,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				keyword["娜娜"] = "叫我嗎？叫一次一百萬"
 				keyword["天氣"] = "不管天氣好壞,我都不想離開被窩"
 
+				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(keyword)).Do();
 				for index,element := range keyword {
 					match, _ := regexp.MatchString(index, msg)
 					if( match ){
